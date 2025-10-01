@@ -1,8 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerSettingsSO", order = 1)]
-
-public class PlayerSettingsSO : ScriptableObject
+[CreateAssetMenu(fileName = "PlayerSettings", menuName = "Clase80/PlayerSettings")]
+public class PlayerDataSo : ScriptableObject
 {
     [Header("Stats")]
     public float life;
@@ -13,6 +12,7 @@ public class PlayerSettingsSO : ScriptableObject
     public KeyCode goLeft;
     public KeyCode goRight;
     public KeyCode goUp;
-    public KeyCode shoot;
-    
+
+    [Header("Bullet")]
+    public Bullet bulletPrefab;
 }
