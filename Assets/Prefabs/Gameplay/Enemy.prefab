@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3221736641939544707}
   - component: {fileID: 1693737270656582469}
   - component: {fileID: 7756888025485468154}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Content Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 953818135374791142}
   - component: {fileID: 3850315356760587182}
   - component: {fileID: 2342662142408373001}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Life Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5907065742564345285}
   - component: {fileID: 3662762986166956904}
   - component: {fileID: 2689000067676171555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,6 +342,10 @@ PrefabInstance:
     - target: {fileID: 1007437012762649323, guid: 0a36d30772492e743b8cfbc6c1bd5f12, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007437012762649323, guid: 0a36d30772492e743b8cfbc6c1bd5f12, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1309484041969482244, guid: 0a36d30772492e743b8cfbc6c1bd5f12, type: 3}
       propertyPath: m_VertexColorAlwaysGammaSpace
