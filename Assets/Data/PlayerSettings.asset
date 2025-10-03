@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dcb701fdfbd2b4583dfc69e58c551c, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 25
   jumpForce: 75
   goLeft: 97
   goRight: 100

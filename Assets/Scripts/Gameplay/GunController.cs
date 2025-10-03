@@ -2,21 +2,16 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    private PlayerController playerController;
-
     private Animator animator;
-
-    private Vector3 initialPosition;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
-        //playerController.onGunAnimation += PlayerController_onGunAnimation;
-        //No se pq me esta tirando error de que no esta instanciado xd
-
         animator = GetComponent<Animator>();
+    }
 
-        initialPosition = transform.position;
+    private void OnEnable()
+    {
+        PlayerController.onGunAnimation += PlayerController_onGunAnimation;
     }
 
     private void Update()
@@ -25,11 +20,13 @@ public class GunController : MonoBehaviour
         transform.position = targetPos;
     }
 
-    public void PlayerController_onGunAnimation(bool isFiring)
+    private void OnDisable()
     {
-        if (isFiring)
-        {
-            animator.Play("Fire");
-        }
+        PlayerController.onGunAnimation -= PlayerController_onGunAnimation;
+    }
+
+    public void PlayerController_onGunAnimation(PlayerController playerController)
+    {
+        animator.Play("Fire");
     }
 }

@@ -1,31 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-    public class UiLife : MonoBehaviour
+public class UiLife : MonoBehaviour
+{
+    [SerializeField] private HealthSystem healthSystem;
+    [SerializeField] private Image barLife;
+
+    private void OnEnable()
     {
-        [SerializeField] private HealthSystem target;
-        [SerializeField] private Image barLife;
-
-        private void Awake ()
-        {
-            target.onLifeUpdated += HealthSystem_onLifeUpdated;
-            target.onDie += HealthSystem_onDie;
-        }
-
-        private void OnDestroy ()
-        {
-            target.onLifeUpdated -= HealthSystem_onLifeUpdated;
-            target.onDie -= HealthSystem_onDie;
-        }
-
-        public void HealthSystem_onLifeUpdated(int current, int max)
-        {
-            float lerp = current / (float)max;
-            barLife.fillAmount = lerp;
-        }
-
-        private void HealthSystem_onDie()
-        {
-            barLife.fillAmount = 0;
-        }
+        healthSystem.onLifeUpdated += HealthSystem_onLifeUpdated;
+        healthSystem.onDie += HealthSystem_onDie;
     }
+
+    private void OnDisable()
+    {
+        healthSystem.onLifeUpdated -= HealthSystem_onLifeUpdated;
+        healthSystem.onDie -= HealthSystem_onDie;
+    }
+
+    public void HealthSystem_onLifeUpdated(int current, int max)
+    {
+        float lerp = current / (float)max;
+        barLife.fillAmount = lerp;
+    }
+
+    private void HealthSystem_onDie()
+    {
+        barLife.fillAmount = 0;
+    }
+}

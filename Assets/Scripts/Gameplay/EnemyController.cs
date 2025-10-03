@@ -4,7 +4,8 @@ public class EnemyController : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D enemyRigidbody;
-    private HealthSystem healthSystem;
+
+    [SerializeField] private HealthSystem healthSystem;
 
     [SerializeField] private EnemyDataSo enemyData;
     [SerializeField] private float limitMovementRight = 1f;
@@ -18,8 +19,10 @@ public class EnemyController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyRigidbody = GetComponent<Rigidbody2D>();
+    }
 
-        healthSystem = GetComponent<HealthSystem>();
+    private void OnEnable()
+    {
         healthSystem.onDie += HealthSystem_onDie;
     }
 
@@ -45,27 +48,35 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        healthSystem.onDie -= HealthSystem_onDie;
+    }
+
     public void Move()
     {
-        if (transform.position.x <= limitLeft)
+        if (transform.position.x <= limitLeft) //Si toca el borde izquierdo
         {
             enemyRigidbody.velocityX = enemySpeed;
             spriteRenderer.flipX = false;
 
-            if (enemyRigidbody.velocityX < enemySpeed && enemyRigidbody.velocityX >= 0)
-            {
-                enemyRigidbody.velocityX = enemySpeed;
-            }
         }
-        if (transform.position.x >= limitRight)
+        if (transform.position.x >= limitRight) //Si toca el borde derecho
         {
             enemyRigidbody.velocityX = -enemySpeed;
             spriteRenderer.flipX = true;
 
-            if (enemyRigidbody.velocityX < -enemySpeed && enemyRigidbody.velocityX < 0)
-            {
-                enemyRigidbody.velocityX = enemySpeed;
-            }
+        }
+
+        if (enemyRigidbody.velocityX < enemySpeed && enemyRigidbody.velocityX >= 0)
+        {
+            enemyRigidbody.velocityX = enemySpeed;
+            spriteRenderer.flipX = false;
+        }
+        if (enemyRigidbody.velocityX > -enemySpeed && enemyRigidbody.velocityX < 0)
+        {
+            enemyRigidbody.velocityX = -enemySpeed;
+            spriteRenderer.flipX = true;
         }
     }
 

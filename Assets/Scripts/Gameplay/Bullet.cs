@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -22,8 +23,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Set (Vector3 direction)
+    public void Set (Vector3 spawnPosition, Vector3 direction)
     {
+        transform.position = spawnPosition;
         bulletRigidbody.bodyType = RigidbodyType2D.Dynamic;
         bulletRigidbody.velocity = direction * speed;
     }
