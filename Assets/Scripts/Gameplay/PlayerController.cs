@@ -1,81 +1,105 @@
+using System;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
-namespace Clase08
+public class PlayerController : MonoBehaviour
 {
-    public class PlayerController : MonoBehaviour
+    public event Action<bool> onGunAnimation;
+
+    private HealthSystem healthSystem;
+
+    [SerializeField] private PlayerDataSo data;
+    [SerializeField] private Transform firePoint;
+
+    private Rigidbody2D playerRigidbody;
+    private SpriteRenderer spriteRenderer;
+
+    bool isJumping = false;
+    bool isPause = false;
+
+    private void Awake()
     {
-        private HealthSystem healthSystem;
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.onDie += HealthSystem_onDie;
 
-        [SerializeField] private PlayerDataSo data;
-        [SerializeField] private Transform firePoint;
+        playerRigidbody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        private Rigidbody2D playerRigidbody;
+        isPause = false;
+    }
 
-        bool isJumping = false;
-
-        private void Awake ()
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !isPause)
         {
-            healthSystem = GetComponent<HealthSystem>();
-            healthSystem.onDie += HealthSystem_onDie;
-
-            playerRigidbody = GetComponent<Rigidbody2D>();
+            Fire();
         }
 
-        private void Update ()
+        if (Input.GetKeyDown(data.pauseGame))
         {
-            if (Input.GetMouseButtonDown(0))
+            switch (isPause)
             {
-                Fire();
-            }
-
-            Move();
-
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            isJumping = false;
-        }
-
-        public void Move()
-        {
-            if (Input.GetKey(data.goLeft))
-            {
-                playerRigidbody.AddForce(data.speed * Vector2.left, ForceMode2D.Force);
-            }
-
-            if (Input.GetKey(data.goRight))
-            {
-                playerRigidbody.AddForce(data.speed * Vector2.right, ForceMode2D.Force);
-            }
-
-            if (Input.GetKey(data.goUp) && !isJumping)
-            {
-                playerRigidbody.AddForce(Vector2.up * data.jumpForce, ForceMode2D.Impulse);
-                isJumping = true;
+                case true:
+                    Time.timeScale = 1f;
+                    isPause = false;
+                    break;
+                case false:
+                    Time.timeScale = 0f;
+                    isPause = true;
+                    break;
             }
         }
 
-        private void Fire ()
+        Move();
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isJumping = false;
+    }
+
+    public void Move()
+    {
+        if (Input.GetKey(data.goLeft))
         {
-            if (EventSystem.current.IsPointerOverGameObject()) // Para saber si le pego a un objeto de UI
-                return;
-
-            Bullet bullet = Instantiate(data.bulletPrefab);
-            bullet.transform.position = firePoint.position;
-            bullet.transform.rotation = Quaternion.identity;
-            bullet.gameObject.layer = LayerMask.NameToLayer("Player");
-
-            Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            bullet.transform.LookAt(targetPos);
-            bullet.Set(20, 30);
+            playerRigidbody.AddForce(Vector2.left * data.speed, ForceMode2D.Force);
+            spriteRenderer.flipX = true;
         }
 
-        private void HealthSystem_onDie()
+        if (Input.GetKey(data.goRight))
         {
-            Debug.Log("Murió el Player");
+            playerRigidbody.AddForce(Vector2.right * data.speed, ForceMode2D.Force);
+            spriteRenderer.flipX = false;
         }
+
+        if (Input.GetKey(data.goUp) && !isJumping)
+        {
+            playerRigidbody.AddForce(Vector2.up * data.jumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+        }
+    }
+
+    public void Fire()
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) // Para saber si le pego a un objeto de UI
+            return;
+
+        Bullet bullet = Instantiate(data.bulletPrefab);
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = Quaternion.identity;
+        bullet.gameObject.layer = LayerMask.NameToLayer("Player");
+
+        onGunAnimation?.Invoke(true);
+
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        bullet.transform.LookAt(targetPos);
+        Vector3 bulletDirection = targetPos - transform.position;
+        bullet.Set(bulletDirection);
+    }
+
+    public void HealthSystem_onDie()
+    {
+        Destroy(gameObject);
     }
 }
