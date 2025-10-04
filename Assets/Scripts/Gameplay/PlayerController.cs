@@ -13,16 +13,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HealthSystem healthSystem;
 
     private Rigidbody2D playerRigidbody;
-    private SpriteRenderer spriteRenderer;
 
-    bool isJumping = false;
-    bool isPause = false;
-    bool isAlive = true;
+    [NonSerialized] public bool isJumping = false;
+    private bool isPause = false;
+    private bool isAlive = true;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         isPause = false;
     }
@@ -58,12 +56,6 @@ public class PlayerController : MonoBehaviour
         }
 
         Move();
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        isJumping = false;
     }
 
     private void OnDisable()
@@ -75,18 +67,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(data.goLeft))
         {
-            playerRigidbody.AddForce(Vector2.left * data.speed, ForceMode2D.Force);
-            spriteRenderer.flipX = true;
+            playerRigidbody.AddForce(Vector2.left * data.speed * Time.deltaTime, ForceMode2D.Force);
+            transform.rotation = new Quaternion(0, 180, 0, 0);
         }
 
         if (Input.GetKey(data.goRight))
         {
-            playerRigidbody.AddForce(Vector2.right * data.speed, ForceMode2D.Force);
-            spriteRenderer.flipX = false;
+            playerRigidbody.AddForce(Vector2.right * data.speed * Time.deltaTime, ForceMode2D.Force);
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
 
         if (Input.GetKey(data.goUp) && !isJumping)
         {
+            playerRigidbody.velocityY = 0f;
             playerRigidbody.AddForce(Vector2.up * data.jumpForce, ForceMode2D.Impulse);
             isJumping = true;
         }
@@ -97,16 +90,13 @@ public class PlayerController : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject()) // Para saber si le pego a un objeto de UI
             return;
 
+        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Bullet bullet = Instantiate(data.bulletPrefab);
-        //bullet.transform.position = firePoint.position;
-        bullet.gameObject.layer = LayerMask.NameToLayer("Player");
+        bullet.transform.position = firePoint.position;
+        Vector3 bulletDirection = (targetPos - firePoint.position).normalized;
+        bullet.Set(bulletDirection);
 
         onGunAnimation?.Invoke(this);
-
-        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //bullet.transform.LookAt(targetPos);
-        Vector3 bulletDirection = targetPos - transform.position;
-        bullet.Set(firePoint.position, bulletDirection);
     }
 
     public void HealthSystem_onDie()

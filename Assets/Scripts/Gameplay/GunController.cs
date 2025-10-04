@@ -14,12 +14,6 @@ public class GunController : MonoBehaviour
         PlayerController.onGunAnimation += PlayerController_onGunAnimation;
     }
 
-    private void Update()
-    {
-        Vector3 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = targetPos;
-    }
-
     private void OnDisable()
     {
         PlayerController.onGunAnimation -= PlayerController_onGunAnimation;
