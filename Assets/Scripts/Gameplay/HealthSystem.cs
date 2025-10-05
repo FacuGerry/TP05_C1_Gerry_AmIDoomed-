@@ -6,8 +6,8 @@ public class HealthSystem : MonoBehaviour
     public event Action<int, int> onLifeUpdated; 
     public event Action onDie;
 
-    private int life = 100;
-    [SerializeField] private int maxLife = 100;
+    private int life;
+    public int maxLife = 100;
 
     private void Start ()
     {
