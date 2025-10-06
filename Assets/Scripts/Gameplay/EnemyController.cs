@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public event Action onEnemyDeath;
+
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D enemyRigidbody;
-    private ParticleSystem particles;
 
     [SerializeField] private HealthSystem healthSystem;
     [SerializeField] private EnemyDataSo enemyData;
@@ -19,7 +21,6 @@ public class EnemyController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyRigidbody = GetComponent<Rigidbody2D>();
-        particles = GetComponent<ParticleSystem>();
     }
 
     private void OnEnable()
@@ -83,7 +84,7 @@ public class EnemyController : MonoBehaviour
 
     private void HealthSystem_onDie()
     {
-        particles.Emit(10);
+        onEnemyDeath?.Invoke();
         Destroy(gameObject);
         Debug.Log("Murió el enemigo");
     }

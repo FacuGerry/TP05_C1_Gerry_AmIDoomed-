@@ -8,4 +8,9 @@ public class HandleCollisionGround : MonoBehaviour
     {
         controller.isJumping = false;
     }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        controller.isJumping = true;
+    }
 }

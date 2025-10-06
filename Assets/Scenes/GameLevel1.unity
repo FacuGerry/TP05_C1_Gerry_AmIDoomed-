@@ -2422,7 +2422,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3471182974097672269, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.84
+      value: 9.3
       objectReference: {fileID: 0}
     - target: {fileID: 3471182974097672269, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2467,6 +2467,22 @@ PrefabInstance:
     - target: {fileID: 5870428117639254437, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809740667677235424, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
+      propertyPath: TriggerModule.inside
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809740667677235424, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809740667677235424, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
+      propertyPath: TriggerModule.primitives.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809740667677235424, guid: 54c5565d12f96354c9825fd1b35e5f10, type: 3}
+      propertyPath: 'TriggerModule.primitives.Array.data[0]'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
