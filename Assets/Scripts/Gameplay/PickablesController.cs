@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 public class PickablesController : MonoBehaviour
 {
-    public static event Action<PickablesController, int> onCoinsChanged;
+    public static event Action<PickablesController> onCoinsChanged;
 
     [Header("Type of pickable")]
     [SerializeField] private bool isLife = false;
@@ -10,8 +10,6 @@ public class PickablesController : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private int lifeHeal;
-
-    public int coinPickedValue;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,7 +34,7 @@ public class PickablesController : MonoBehaviour
     {
         if (isCoin)
         {
-            onCoinsChanged?.Invoke(this, coinPickedValue);
+            onCoinsChanged?.Invoke(this);
         }
     }
 }

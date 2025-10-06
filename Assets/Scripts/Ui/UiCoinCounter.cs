@@ -4,8 +4,7 @@ using UnityEngine;
 public class UiCoinCounter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coinsText;
-
-    private int coins;
+    [SerializeField] private CoinsDataSo coinsData;
 
     private void Awake()
     {
@@ -14,12 +13,14 @@ public class UiCoinCounter : MonoBehaviour
 
     private void Start()
     {
-        coins = 0;
+        coinsData.coins = 0;
     }
 
-    public void OnCoinsChanged_WriteCoins(PickablesController pickablesController, int coinPickedValue)
+    public void OnCoinsChanged_WriteCoins(PickablesController pickablesController)
     {
-        coins += coinPickedValue;
-        coinsText.text = coins.ToString("0");
+        int coinPickedValue = coinsData.coinsValue;
+        coinsData.coins += coinPickedValue;
+        coinsData.totalCoins += coinPickedValue;
+        coinsText.text = coinsData.coins.ToString("0");
     }
 }
