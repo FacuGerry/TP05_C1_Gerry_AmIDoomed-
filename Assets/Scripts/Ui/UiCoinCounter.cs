@@ -16,6 +16,11 @@ public class UiCoinCounter : MonoBehaviour
         coinsData.coins = 0;
     }
 
+    private void OnDestroy()
+    {
+        PickablesController.onCoinsChanged -= OnCoinsChanged_WriteCoins;
+    }
+
     public void OnCoinsChanged_WriteCoins(PickablesController pickablesController)
     {
         int coinPickedValue = coinsData.coinsValue;
