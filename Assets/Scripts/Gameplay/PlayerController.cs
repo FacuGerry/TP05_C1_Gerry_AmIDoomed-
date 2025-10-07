@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public static event Action<PlayerController> onGunAnimation;
     public static event Action<PlayerController> onPlayerDie;
+    public static event Action<PlayerController> onPause;
+    public static event Action<PlayerController> onResume;
 
     [SerializeField] private PlayerDataSo data;
     [SerializeField] private Transform firePoint;
@@ -46,10 +48,12 @@ public class PlayerController : MonoBehaviour
                     case true:
                         Time.timeScale = 1f;
                         isPause = false;
+                        onResume?.Invoke(this);
                         break;
                     case false:
                         Time.timeScale = 0f;
                         isPause = true;
+                        onPause?.Invoke(this);
                         break;
                 }
             }

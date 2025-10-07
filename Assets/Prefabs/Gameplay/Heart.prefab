@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.04, y: -1.78, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 0.9375}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 222d62d87db5931498bb85845842b0d3, type: 3}
+  m_Sprite: {fileID: 6277386229876091404, guid: 0aac9d29bb3435a4997c75ff9b0be4af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,8 +123,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.13}
-  m_Size: {x: 0.9, y: 0.54}
+  m_Offset: {x: -0.0044641495, y: 0.0859}
+  m_Size: {x: 0.1165638, y: 0.15}
   m_Direction: 0
 --- !u!95 &3548223324567940603
 Animator:
@@ -136,7 +136,7 @@ Animator:
   m_GameObject: {fileID: 4428986929385388997}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d828f90b1a16cfc4f85217593ec0f0c5, type: 2}
+  m_Controller: {fileID: -8509231440792491205, guid: 0aac9d29bb3435a4997c75ff9b0be4af, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -163,4 +163,3 @@ MonoBehaviour:
   isLife: 1
   isCoin: 0
   lifeHeal: 10
-  coinPickedValue: 0
