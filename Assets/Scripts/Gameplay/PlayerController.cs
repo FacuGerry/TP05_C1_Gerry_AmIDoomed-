@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public static event Action<PlayerController> onPlayerDie;
     public static event Action<PlayerController> onPause;
     public static event Action<PlayerController> onResume;
+    public static event Action<PlayerController, int> onAnimating;
 
     [SerializeField] private PlayerDataSo data;
     [SerializeField] private Transform firePoint;
@@ -17,8 +18,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRigidbody;
 
     [NonSerialized] public bool isJumping = false;
+    [NonSerialized] public bool isWalking = false;
     private bool isPause = false;
     private bool isAlive = true;
+
+    private enum AnimationStates
+    {
+        Idle = 0,
+        Walk = 1,
+        Jump = 2
+    };
 
     private void Awake()
     {
@@ -60,6 +69,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Move();
+        Animate();
     }
 
     private void OnDisable()
@@ -73,12 +83,14 @@ public class PlayerController : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.left * data.speed * Time.deltaTime, ForceMode2D.Force);
             transform.rotation = new Quaternion(0, 180, 0, 0);
+            isWalking = true;
         }
 
         if (Input.GetKey(data.goRight))
         {
             playerRigidbody.AddForce(Vector2.right * data.speed * Time.deltaTime, ForceMode2D.Force);
             transform.rotation = new Quaternion(0, 0, 0, 0);
+            isWalking = true;
         }
 
         if (Input.GetKey(data.goUp) && !isJumping)
@@ -86,6 +98,23 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.velocityY = 0f;
             playerRigidbody.AddForce(Vector2.up * data.jumpForce, ForceMode2D.Impulse);
             isJumping = true;
+        }
+    }
+
+    public void Animate()
+    {
+        if (isWalking && !isJumping)
+        {
+            onAnimating?.Invoke(this, (int)AnimationStates.Walk);
+            isWalking = false;
+        }
+        else if (isJumping)
+        {
+            onAnimating?.Invoke(this, (int)AnimationStates.Jump);
+        }
+        else
+        {
+            onAnimating?.Invoke(this, (int)AnimationStates.Idle);
         }
     }
 
