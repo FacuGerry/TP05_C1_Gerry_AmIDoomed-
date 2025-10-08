@@ -12,6 +12,7 @@ public class UiPlayerDie : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalCoinsNum;
     [SerializeField] private Button btnReplay;
     [SerializeField] private Button btnMainMenu;
+    [SerializeField] private string sceneToLoad;
 
     private void Start()
     {
@@ -37,7 +38,7 @@ public class UiPlayerDie : MonoBehaviour
 
     public void ReplayClicked()
     {
-        SceneManager.LoadScene("GameLevel1");
+        SceneManager.LoadScene(sceneToLoad);
         Time.timeScale = 1f;
     }
 

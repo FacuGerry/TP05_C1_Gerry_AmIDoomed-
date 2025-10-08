@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinsValue: 1
   coins: 0
-  totalCoins: 11
+  totalCoins: 0

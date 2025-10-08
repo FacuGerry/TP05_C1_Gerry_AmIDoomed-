@@ -12000,6 +12000,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1095724876}
     m_Modifications:
     - target: {fileID: 3077467062761580692, guid: 13123ff6a0401c54580959d4d135af1d, type: 3}
+      propertyPath: sceneToLoad
+      value: GameLevel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077467062761580692, guid: 13123ff6a0401c54580959d4d135af1d, type: 3}
       propertyPath: coinsCounter
       value: 
       objectReference: {fileID: 415889587}
@@ -12433,6 +12437,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1095724876}
     m_Modifications:
     - target: {fileID: 14407202783764116, guid: a95e985288156d844a3f4d96bc5c61fa, type: 3}
+      propertyPath: sceneToLoad
+      value: GameLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 14407202783764116, guid: a95e985288156d844a3f4d96bc5c61fa, type: 3}
       propertyPath: coinsCounter
       value: 
       objectReference: {fileID: 415889587}
@@ -12440,6 +12448,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1220819496048599003, guid: a95e985288156d844a3f4d96bc5c61fa, type: 3}
+      propertyPath: coinsCounter
+      value: 
+      objectReference: {fileID: 415889587}
     - target: {fileID: 7404714355542691973, guid: a95e985288156d844a3f4d96bc5c61fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0
