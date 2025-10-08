@@ -6,9 +6,10 @@ public class UiCoinCounter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private CoinsDataSo coinsData;
 
-    private void Awake()
+    private void OnEnable()
     {
         PickablesController.onCoinsChanged += OnCoinsChanged_WriteCoins;
+        PlayerController.onPlayerDie -= OnPlayerDie_RestartCoins;
     }
 
     private void Start()
@@ -16,9 +17,10 @@ public class UiCoinCounter : MonoBehaviour
         coinsData.coins = 0;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         PickablesController.onCoinsChanged -= OnCoinsChanged_WriteCoins;
+        PlayerController.onPlayerDie -= OnPlayerDie_RestartCoins;
     }
 
     public void OnCoinsChanged_WriteCoins(PickablesController pickablesController)
@@ -27,5 +29,10 @@ public class UiCoinCounter : MonoBehaviour
         coinsData.coins += coinPickedValue;
         coinsData.totalCoins += coinPickedValue;
         coinsText.text = coinsData.coins.ToString("0");
+    }
+
+    public void OnPlayerDie_RestartCoins(PlayerController playerController)
+    {
+        coinsData.totalCoins -= coinsData.coins;
     }
 }

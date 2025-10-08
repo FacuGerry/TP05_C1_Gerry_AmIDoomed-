@@ -11,12 +11,11 @@ public class PickablesController : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private int lifeHeal;
-  
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         LifePicked(collision);
         CoinPicked();
-        onCoinsPicked?.Invoke(this);
 
         Destroy(gameObject);
     }
@@ -37,6 +36,7 @@ public class PickablesController : MonoBehaviour
         if (isCoin)
         {
             onCoinsChanged?.Invoke(this);
+            onCoinsPicked?.Invoke(this);
         }
     }
 }

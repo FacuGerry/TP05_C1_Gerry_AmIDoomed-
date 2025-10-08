@@ -1,22 +1,18 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UiLevelCompleted : MonoBehaviour
 {
-    [SerializeField] private CoinsDataSo coinsData;
     [SerializeField] private GameObject levelCompleted;
-    [SerializeField] private Button btnReplay;
-    [SerializeField] private Button btnMainMenu;
-    [SerializeField] private GameObject coinsCounter;
-    [SerializeField] private TextMeshProUGUI coinsNum;
-    [SerializeField] private TextMeshProUGUI totalCoinsNum;
+    [SerializeField] private string sceneToLoad;
+    [SerializeField] private float timer;
+
+    private float timerValue;
+    private bool isFinished = false;
 
     private void Start()
     {
-        btnReplay.onClick.AddListener(ReplayClicked);
-        btnMainMenu.onClick.AddListener(MainMenuClicked);
+        timerValue = timer;
     }
 
     private void OnEnable()
@@ -24,35 +20,30 @@ public class UiLevelCompleted : MonoBehaviour
         DoorController.onDoorCollisioned += OnDoorCollisioned_LevelCompleteUiAppear;
     }
 
+    private void Update()
+    {
+        if (isFinished)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                levelCompleted.SetActive(false);
+                SceneManager.LoadScene(sceneToLoad);
+                timer = timerValue;
+                isFinished = false;
+            }
+        }
+    }
+
     private void OnDisable()
     {
         DoorController.onDoorCollisioned -= OnDoorCollisioned_LevelCompleteUiAppear;
     }
 
-    private void OnDestroy()
-    {
-        btnReplay.onClick.RemoveAllListeners();
-        btnMainMenu.onClick.RemoveAllListeners();
-    }
-
     public void OnDoorCollisioned_LevelCompleteUiAppear(DoorController doorController)
     {
-        Time.timeScale = 0f;
-        coinsNum.text = coinsData.coins.ToString("0");
-        totalCoinsNum.text = coinsData.totalCoins.ToString("0");
-        coinsCounter.SetActive(false);
+        isFinished = true;
+        //Aca podría agregar algo que "pause" el juego pero al mismo tiempo no
         levelCompleted.SetActive(true);
-    }
-
-    public void ReplayClicked()
-    {
-        SceneManager.LoadScene("GameLevel1");
-        Time.timeScale = 1f;
-    }
-
-    public void MainMenuClicked()
-    {
-        SceneManager.LoadScene("MainMenu");
-        Time.timeScale = 1f;
     }
 }
