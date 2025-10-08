@@ -19,19 +19,29 @@ public class UiLevelCompleted : MonoBehaviour
         btnMainMenu.onClick.AddListener(MainMenuClicked);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnEnable()
     {
-        Time.timeScale = 0f;
-        coinsNum.text = coinsData.coins.ToString("0");
-        totalCoinsNum.text = coinsData.totalCoins.ToString("0");
-        coinsCounter.SetActive(false);
-        levelCompleted.SetActive(true);
+        DoorController.onDoorCollisioned += OnDoorCollisioned_LevelCompleteUiAppear;
+    }
+
+    private void OnDisable()
+    {
+        DoorController.onDoorCollisioned -= OnDoorCollisioned_LevelCompleteUiAppear;
     }
 
     private void OnDestroy()
     {
         btnReplay.onClick.RemoveAllListeners();
         btnMainMenu.onClick.RemoveAllListeners();
+    }
+
+    public void OnDoorCollisioned_LevelCompleteUiAppear(DoorController doorController)
+    {
+        Time.timeScale = 0f;
+        coinsNum.text = coinsData.coins.ToString("0");
+        totalCoinsNum.text = coinsData.totalCoins.ToString("0");
+        coinsCounter.SetActive(false);
+        levelCompleted.SetActive(true);
     }
 
     public void ReplayClicked()

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PickablesController : MonoBehaviour
 {
     public static event Action<PickablesController> onCoinsChanged;
+    public static event Action<PickablesController> onCoinsPicked;
 
     [Header("Type of pickable")]
     [SerializeField] private bool isLife = false;
@@ -10,11 +11,12 @@ public class PickablesController : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private int lifeHeal;
-
+  
     private void OnTriggerEnter2D(Collider2D collision)
     {
         LifePicked(collision);
         CoinPicked();
+        onCoinsPicked?.Invoke(this);
 
         Destroy(gameObject);
     }

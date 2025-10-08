@@ -140,4 +140,3 @@ MonoBehaviour:
   isLife: 0
   isCoin: 1
   lifeHeal: 0
-  coinPickedValue: 1
