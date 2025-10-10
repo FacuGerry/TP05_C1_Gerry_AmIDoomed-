@@ -16,13 +16,13 @@ public class SFXController : MonoBehaviour
 
     private void OnEnable()
     {
-        PickablesController.onCoinsMakeSound += OnCoinsPicked_EmmitSound;
+        PickablesController.onPickablesMakeSound += OnCoinsPicked_EmmitSound;
         PlayerController.onPlayerDie += OnPlayerDie_GameOverSound;
     }
 
     private void OnDisable()
     {
-        PickablesController.onCoinsMakeSound -= OnCoinsPicked_EmmitSound;
+        PickablesController.onPickablesMakeSound -= OnCoinsPicked_EmmitSound;
         PlayerController.onPlayerDie -= OnPlayerDie_GameOverSound;
     }
 

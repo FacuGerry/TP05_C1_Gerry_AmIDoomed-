@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
     private void HealthSystem_onDie()
     {
         onEnemyDeath?.Invoke();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         Debug.Log("Murió el enemigo");
     }
 }

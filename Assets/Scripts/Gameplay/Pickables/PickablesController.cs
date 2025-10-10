@@ -3,7 +3,7 @@ using UnityEngine;
 public class PickablesController : MonoBehaviour
 {
     public static event Action<PickablesController> onCoinsPicked;
-    public static event Action<PickablesController, bool, bool> onCoinsMakeSound;
+    public static event Action<PickablesController, bool, bool> onPickablesMakeSound;
 
     [Header("Type of pickable")]
     [SerializeField] private bool isLife = false;
@@ -16,8 +16,8 @@ public class PickablesController : MonoBehaviour
     {
         LifePicked(collision);
         CoinPicked();
-
-        Destroy(gameObject);
+        PickablesSound();
+        gameObject.SetActive(false);
     }
 
     public void LifePicked(Collider2D collision)
@@ -33,7 +33,14 @@ public class PickablesController : MonoBehaviour
 
     public void CoinPicked()
     {
+        if (isCoin)
+        {
             onCoinsPicked?.Invoke(this);
-            onCoinsMakeSound?.Invoke(this, isLife, isCoin);
+        }
+    }
+
+    public void PickablesSound()
+    {
+        onPickablesMakeSound?.Invoke(this, isLife, isCoin);
     }
 }

@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
     public void HealthSystem_onDie()
     {
         onPlayerDie?.Invoke(this);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         isAlive = false;
     }
 }
