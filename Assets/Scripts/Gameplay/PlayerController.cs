@@ -6,18 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     public static event Action<PlayerController> onGunFiring;
     public static event Action<PlayerController> onPlayerDie;
+    public static event Action<PlayerController> onPlayerJump;
     public static event Action<PlayerController> onPause;
     public static event Action<PlayerController> onResume;
     public static event Action<PlayerController, int> onAnimating;
 
     [SerializeField] private PlayerDataSo data;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private AudioClip jumpSound;
 
     [SerializeField] private HealthSystem healthSystem;
 
     private Rigidbody2D playerRigidbody;
-    private AudioSource source;
 
     [NonSerialized] public bool isJumping = false;
     [NonSerialized] public bool isWalking = false;
@@ -34,7 +33,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        source = GetComponent<AudioSource>();
 
         isPause = false;
     }
@@ -101,7 +99,7 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.velocityY = 0f;
             playerRigidbody.AddForce(Vector2.up * data.jumpForce, ForceMode2D.Impulse);
             isJumping = true;
-            source.PlayOneShot(jumpSound);
+            onPlayerJump?.Invoke(this);
         }
     }
 
