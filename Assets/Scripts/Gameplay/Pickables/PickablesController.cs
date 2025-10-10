@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 public class PickablesController : MonoBehaviour
 {
-    public static event Action<PickablesController> onCoinsChanged;
     public static event Action<PickablesController> onCoinsPicked;
+    public static event Action<PickablesController, bool, bool> onCoinsMakeSound;
 
     [Header("Type of pickable")]
     [SerializeField] private bool isLife = false;
@@ -33,10 +33,7 @@ public class PickablesController : MonoBehaviour
 
     public void CoinPicked()
     {
-        if (isCoin)
-        {
-            onCoinsChanged?.Invoke(this);
             onCoinsPicked?.Invoke(this);
-        }
+            onCoinsMakeSound?.Invoke(this, isLife, isCoin);
     }
 }
