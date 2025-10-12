@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class PlayerAnimations : MonoBehaviour
 {

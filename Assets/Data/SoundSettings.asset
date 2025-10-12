@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: SoundSettings
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 9608e85d82cf178479298c26d5d2ffc4, type: 2}
+  masterVol: -10
+  musicVol: 0
+  sfxVol: 0

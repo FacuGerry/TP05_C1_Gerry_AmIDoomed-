@@ -2741,7 +2741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6477258536646927712, guid: cfaddfa940bd53c4489c9101002337e7, type: 3}
       propertyPath: timer
-      value: 1.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6477258536646927712, guid: cfaddfa940bd53c4489c9101002337e7, type: 3}
       propertyPath: sceneToLoad

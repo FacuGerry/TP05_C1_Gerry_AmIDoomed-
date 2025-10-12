@@ -2012,6 +2012,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3661824263549730162, guid: 8b20371cc7cdf6841a415a3f80247565, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
+    - target: {fileID: 3661824263549730162, guid: 8b20371cc7cdf6841a415a3f80247565, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
     - target: {fileID: 5091885009013181585, guid: 8b20371cc7cdf6841a415a3f80247565, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
@@ -5691,14 +5699,6 @@ PrefabInstance:
     - target: {fileID: 2392380140310981586, guid: cfaddfa940bd53c4489c9101002337e7, type: 3}
       propertyPath: m_Name
       value: CanvasLevelCompleted
-      objectReference: {fileID: 0}
-    - target: {fileID: 6477258536646927712, guid: cfaddfa940bd53c4489c9101002337e7, type: 3}
-      propertyPath: timer
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9080395030715243680, guid: cfaddfa940bd53c4489c9101002337e7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

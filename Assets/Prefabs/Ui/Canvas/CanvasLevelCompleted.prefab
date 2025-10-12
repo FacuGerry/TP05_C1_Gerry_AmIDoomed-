@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCompleted: {fileID: 9080395030715243680}
   sceneToLoad: GameLevel2
-  timer: 3
+  timer: 0.7
 --- !u!1 &3418099720598416071
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7306916648712964051
 RectTransform:
   m_ObjectHideFlags: 0

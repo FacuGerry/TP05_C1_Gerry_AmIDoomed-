@@ -46,11 +46,14 @@ public class PlayerController : MonoBehaviour
     {
         if (isAlive)
         {
-            if (Input.GetMouseButtonDown(0) && !isPause)
+            if (!isPause)
             {
-                Fire();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Fire();
+                }
+                Move();
             }
-
             if (Input.GetKeyDown(data.pauseGame))
             {
                 switch (isPause)
@@ -68,8 +71,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
-        Move();
         Animate();
     }
 
